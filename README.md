@@ -28,6 +28,7 @@ Moodle'i privaatpildid saab lisada samal viisil kausta `assets/images/` järgmis
 ## GitHub Pages
 
 Workflow `.github/workflows/pages.yml` ehitab saidi `main` harusse tehtud muudatuse järel. GitHubi repositooriumi seadetes tuleb Pagesi all valida **GitHub Actions**. Sait ei vaja backendi ega andmebaasi.
+Koodinäite PIN on `1466`; kui `COURSE_CODE_PIN` Secret on seadistatud, kasutatakse seda väärtust.
 
 ## Kujunduse kohandamine
 
