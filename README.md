@@ -8,7 +8,13 @@ python build.py
 
 Tulemus on kaustas `site/`. Ava kohapeal `site/index.html` või käivita staatiline failiserver. Build proovib materjalides olevad välised pildid lokaalselt kausta `site/assets/images/` laadida. Moodle'i `draftfile.php` lingid vajavad Moodle'ist käsitsi alla laaditud faile, sest need ei ole avalikud.
 
-Koodinäited märgistatakse C/C++-na ja värvitakse lehel Highlight.js abil. See laaditakse CDN-ist, seega vajab süntaksivärvimine avalikus lehes internetiühendust.
+Koodinäited märgistatakse C/C++-na ja värvitakse build'i ajal otse HTML-i sisse, seega töötab süntaksivärvimine ka lokaalselt ja ilma välise teenuseta.
+
+## Logo lisamine
+
+Google-hostitud logo URL võib otse allalaadimisel anda 403. Ava logo Chrome'is, vali pildil paremklõpsuga **Save image as...** ja salvesta fail nimega `assets/branding/robotiklubi-logo.png` (sobivad ka `.jpg`, `.jpeg`, `.svg` või `.webp`). Järgmine build lisab logo automaatselt saidi päisesse. Ära salvesta HTML-vealehte pildifailina.
+
+Moodle'i privaatpildid saab lisada samal viisil kausta `assets/images/` järgmiste nimedega: `arduino-ide-screenshot-1.png`, `arduino-ide-screenshot-2.png`, `n-idiskood-blokkdiagramm.png` ja `arduino-ide-esp32-url.png`. Build kasutab neid automaatselt ja asendab vastavad Moodle'i URL-id lokaalsete viidetega.
 
 ## GitHub Pages
 

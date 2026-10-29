@@ -13,6 +13,7 @@ a { color: var(--blue); }
 .site-header { min-height: 76px; padding: 0 5vw; display: flex; align-items: center; justify-content: space-between; background: var(--light-blue); border-bottom: 1px solid var(--line); }
 .brand { display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; font-size: .75rem; line-height: 1.25; letter-spacing: .04em; }
 .brand strong { font-size: .95rem; }
+.brand-logo { display: block; width: auto; max-width: 150px; max-height: 44px; object-fit: contain; }
 .brand-mark { display: grid; place-items: center; width: 40px; height: 40px; border: 2px solid var(--blue); color: var(--blue); font-weight: bold; }
 .layout { display: grid; grid-template-columns: 280px minmax(0, 900px); gap: 5vw; max-width: 1440px; margin: auto; padding: 48px 5vw 80px; }
 .layout--overview { display: block; max-width: 1040px; }
@@ -34,8 +35,14 @@ a { color: var(--blue); }
 .lesson-content { padding: 26px 0; border-top: 1px solid var(--line); }
 .lesson-content img { display: block; max-width: 100%; height: auto; margin: 24px auto; }
 .lesson-content pre { overflow-x: auto; padding: 18px; background: var(--light-blue); color: var(--ink); border-left: 4px solid var(--blue); }
-.lesson-content pre code.hljs { padding: 0; background: transparent; }
 .lesson-content pre code { font-family: Consolas, "Courier New", monospace; }
+.lesson-content .code-comment { color: #708090; }
+.lesson-content .code-string { color: #a31515; }
+.lesson-content .code-preprocessor { color: #795e26; }
+.lesson-content .code-number { color: #098658; }
+.lesson-content .code-keyword { color: #0000ff; font-weight: 600; }
+.lesson-content .code-type { color: #267f99; }
+.lesson-content .code-function { color: #795e26; }
 .lesson-content .image-frame { margin: 24px 0; }
 .lesson-content .image-frame img { margin: 0 auto; }
 .pager { display: flex; justify-content: space-between; gap: 20px; padding-top: 24px; border-top: 1px solid var(--line); }
