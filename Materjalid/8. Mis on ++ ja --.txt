@@ -1,0 +1,24 @@
+<p dir="ltr" style="text-align: left;"></p>
+<p>C++ keeles (ja ka paljudes teistes keeltes nt pytohon) kasutatakse sageli operaatoreid <code>++</code> ja <code>--</code>.</p>
+<p>Need võimaldavad muutuja väärtust kiiresti ühe võrra suurendada või vähendada.</p>
+<h3>++ – väärtuse suurendamine</h3>
+<pre><code>int kiirus = 100; // Loome muutuja nimega "kiirus"
+
+kiirus++; // Suurendame kiirust 1 võrra</code></pre>
+<p>Nüüd on muutuja <code>kiirus</code> väärtus 101.</p>
+<p>See käsk on samaväärne järgmisega:</p>
+<pre><code>kiirus = kiirus + 1;</code></pre>
+<h3>-- – väärtuse vähendamine</h3>
+<pre><code>int kiirus = 100; // Loome muutuja nimega "kiirus"
+
+kiirus--; // Vähendame kiirust 1 võrra</code></pre>
+<p>Nüüd on muutuja <code>kiirus</code> väärtus 99.</p>
+<h3>Näide mootorite programmist</h3>
+<pre><strong>Oluline:</strong><span> </span><code>++</code><span> ja </span><code>--</code><span> muudavad ainult muutuja väärtust. Mootori juhtsignaali uuendamiseks tuleb uus väärtus saata ka funktsiooniga </span><code>analogWrite()</code><span>.</span></pre>
+<p></p>
+<pre><code>paremKiirus++;
+analogWrite(PAREM_PWM, paremKiirus);<br><br><p></p></code></pre>
+<p class="c4l-spacer"></p>
+<div class="c4l-keyconcept">See moodle keskond on arendamisel. Tagasiside:&nbsp;<a href="https://moodle.taltech.ee/mod/feedback/view.php?id=1053242">https://moodle.taltech.ee/mod/feedback/view.php?id=1053242</a>&nbsp;lisaks alo.lohmus@robotiklubi.ee ja discord&nbsp;187th_halogeen</div>
+<div class="c4l-attention">Soovi korral testi oma teadmisi siin: <a href="https://moodle.taltech.ee/mod/quiz/view.php?id=1052621" target="_blank">https://moodle.taltech.ee/mod/quiz/view.php?id=1052621</a></div>
+<p></p>

@@ -1,0 +1,31 @@
+<p dir="ltr" style="text-align: left;"></p>
+<p>Funktsiooni <code>pinMode()</code> kasutatakse selleks, et määrata, kuidas mikrokontrolleri kindlat pin'i kasutatakse.</p>
+<p>Meie programmis:</p>
+<pre><code>pinMode(VASAK_PWM, OUTPUT);</code></pre>
+<p>Selles käsus on kaks olulist osa:</p>
+<ul>
+    <li>
+        <p><code>VASAK_PWM</code> – pin, mida soovime seadistada.</p>
+    </li>
+    <li>
+        <p><code>OUTPUT</code> – määrame selle pin'i väljundiks ehk pin hakkab signaale välja saatma.</p>
+    </li>
+</ul>
+<h3>Funktsiooni üldine kuju</h3>
+<pre><code>pinMode(pin, mode);</code></pre>
+<p><strong>Parameetrid:</strong></p>
+<p><code>pin</code> – Arduino pin'i number, mida soovime seadistada.</p>
+<p><code>mode</code> – pin'i töörežiim. Võimalikud väärtused on:</p>
+<ul>
+    <li>
+        <p><code>INPUT</code> – pin'i kasutatakse sisendina, näiteks nupu või anduri oleku lugemiseks.</p>
+    </li>
+    <li>
+        <p><code>OUTPUT</code> – pin'i kasutatakse väljundina, näiteks LED-i või mootoridraiveri juhtimiseks.</p>
+    </li>
+    <li>
+        <p><code>INPUT_PULLUP</code> – pin'i kasutatakse sisendina ning aktiveeritakse sisemine tõmbetakisti.</p>
+    </li>
+</ul>
+<p>Meie mootorite juhtimise programmis kasutame <code>OUTPUT</code> režiimi, sest Arduino peab mootoridraiverile juhtsignaale saatma.</p>
+<p></p>

@@ -1,0 +1,53 @@
+<h4>Koodi blokkdiagramm:</h4>
+<p><img src="https://moodle.taltech.ee/draftfile.php/685804/user/draft/928663207/blokkdiagramm%201.2.drawio.png" alt="" role="presentation" class="img-fluid"><br></p>
+<h4><span style="font-size: 0.9375rem;">Koodi näide (ilma juhtimisloogikata):</span></h4>
+<pre><code>#define VASAK_PWM 23
+#define VASAK_MOOTOR_A 22
+#define VASAK_MOOTOR_B 21
+
+#define PAREM_PWM 18
+#define PAREM_MOOTOR_A 19
+#define PAREM_MOOTOR_B 20
+
+int vasakKiirus = 100;
+int paremKiirus = 100;
+
+void setup() {
+  // Seadistame kõik mootorite juhtpinid väljunditeks
+  pinMode(VASAK_PWM, OUTPUT);
+  pinMode(VASAK_MOOTOR_A, OUTPUT);
+  pinMode(VASAK_MOOTOR_B, OUTPUT);
+
+  pinMode(PAREM_PWM, OUTPUT);
+  pinMode(PAREM_MOOTOR_A, OUTPUT);
+  pinMode(PAREM_MOOTOR_B, OUTPUT);
+
+  // Määrame mootorite pöörlemissuuna
+  digitalWrite(VASAK_MOOTOR_A, HIGH);
+  digitalWrite(VASAK_MOOTOR_B, LOW);
+
+  digitalWrite(PAREM_MOOTOR_A, HIGH);
+  digitalWrite(PAREM_MOOTOR_B, LOW);
+
+  // Määrame algkiirused
+  analogWrite(VASAK_PWM, vasakKiirus);
+  analogWrite(PAREM_PWM, paremKiirus);
+}
+
+void loop() {
+
+  // Suurendame parema mootori kiirust
+  for (int i = 0; i &lt; 50; i++) {
+    paremKiirus++;
+    analogWrite(PAREM_PWM, paremKiirus);
+    delay(50);
+  }
+
+  // Vähendame parema mootori kiirust
+  for (int i = 0; i &lt; 50; i++) {
+    paremKiirus--;
+    analogWrite(PAREM_PWM, paremKiirus);
+    delay(50);
+  }
+}
+</code></pre>

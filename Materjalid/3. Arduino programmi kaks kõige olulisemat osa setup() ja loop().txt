@@ -1,0 +1,28 @@
+<p dir="ltr" style="text-align: left;"></p>
+<p>Arduino programmides kasutatakse tavaliselt kahte põhifunktsiooni:</p>
+<ul>
+    <li>
+        <p><code>setup()</code></p>
+    </li>
+    <li>
+        <p><code>loop()</code></p>
+    </li>
+</ul>
+<h3>setup() – programmi ettevalmistamine</h3>
+<p>Funktsioon <code>setup()</code> käivitatakse üks kord, kui Arduino sisse lülitatakse või taaskäivitatakse.</p>
+<p>Seda kasutatakse näiteks muutujate algväärtuste määramiseks, pin'ide seadistamiseks ja teekide käivitamiseks.</p>
+<h3>loop() – programmi pidev kordamine</h3>
+<p>Pärast <code>setup()</code> funktsiooni täitmist alustatakse funktsiooni <code>loop()</code> täitmist.</p>
+<p>Nagu nimigi ütleb, korratakse <code>loop()</code> funktsioonis olevat koodi pidevalt.</p>
+<p>See võimaldab Arduinol näiteks juhtida mootoreid, lugeda anduritelt väärtusi ja reageerida muutustele.</p>
+<p><strong>Näide:</strong></p>
+<pre><code>void setup() {
+  // Käivitamisel tehtavad tegevused
+}
+
+void loop() {
+  // Tegevused, mida pidevalt korratakse
+}</code></pre>
+<p>Sõna <code>void</code> tähendab, et funktsioon ei tagasta mingit väärtust.</p>
+<p>Looksulud <code>{ }</code> tähistavad funktsiooni algust ja lõppu. Kõik looksulgude vahel olevad käsud kuuluvad vastavasse funktsiooni.</p>
+<p></p>

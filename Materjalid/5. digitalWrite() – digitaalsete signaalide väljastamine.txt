@@ -1,0 +1,29 @@
+<p dir="ltr" style="text-align: left;"></p>
+<p>Funktsiooni <code>digitalWrite()</code> kasutatakse selleks, et määrata digitaalse väljundpin'i olek.</p>
+<p>Meie programmis kasutame seda mootori pöörlemissuuna määramiseks.</p>
+<p><strong>Näide:</strong></p>
+<pre><code>digitalWrite(VASAK_MOOTOR_B, LOW);
+digitalWrite(VASAK_MOOTOR_A, HIGH);</code></pre>
+<p>Digitaalsel väljundil on kaks võimalikku olekut 1 ja 0:</p>
+<ul>
+    <li>
+        <p><code>HIGH</code> – kõrge loogikatase 1, väljundiks on 3,3V</p>
+    </li>
+    <li>
+        <p><code>LOW</code> – madal loogikatase 0, väljundiks on&nbsp;0V</p>
+    </li>
+</ul>
+<p>Meie kasutatava mootoridraiveri puhul saab nende signaalide kombinatsiooniga juhtida mootori pöörlemissuunda.</p>
+<p>Näiteks ühe suuna jaoks võib olla:</p>
+<pre><code>digitalWrite(VASAK_MOOTOR_A, HIGH);
+digitalWrite(VASAK_MOOTOR_B, LOW);</code></pre>
+<p>Vastupidise suuna jaoks vahetame väärtused omavahel:</p>
+<pre><code>digitalWrite(VASAK_MOOTOR_A, LOW);
+digitalWrite(VASAK_MOOTOR_B, HIGH);</code></pre>
+<p>Täpne mootori pöörlemissuund sõltub mootoridraiverist ja mootori ühendamisest.</p>
+<h3>Funktsiooni üldine kuju</h3>
+<pre><code>digitalWrite(pin, value);</code></pre>
+<p><strong>Parameetrid:</strong></p>
+<p><code>pin</code> – ESP32 pin'i number, mida soovime juhtida.</p>
+<p><code>value</code> – pin'ile antav väärtus (<code>HIGH</code> või <code>LOW</code>).</p>
+<p></p>

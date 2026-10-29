@@ -1,0 +1,109 @@
+<p dir="ltr" style="text-align: left;"></p>
+<p>Programmeerimisel on sageli vaja sama tegevust mitu korda järjest korrata.&nbsp;<span>Selleks kasutatakse tsükleid.</span></p>
+<p>C++ keeles on kaks levinud tsüklit:</p>
+<ul>
+    <li>
+        <p><code>while</code></p>
+    </li>
+    <li>
+        <p><code>for</code></p>
+    </li>
+</ul>
+<h3>while-tsükkel</h3>
+<p><code>while</code>-tsükkel kordab koodiplokki seni, kuni etteantud tingimus on tõene.</p>
+<p><strong>Üldine kuju:</strong></p>
+<pre><code>while (tingimus) {
+  // Käsud, mida korratakse
+}</code></pre>
+<p>Enne iga kordust kontrollitakse tingimust. Kui tingimus on tõene, täidetakse looksulgude vahel olevad käsud.</p>
+<p>Kui tingimus muutub vääraks, lõpetatakse tsükli täitmine.</p>
+<p><strong>Näide:</strong></p>
+<p>Järgmine programm loendab kolmest üheni ja väljastab lõpuks teksti „Head uut aastat!“.</p>
+<pre><code>int countdown = 3;
+
+while (countdown &gt; 0) {
+  cout &lt;&lt; countdown &lt;&lt; "\n";
+  countdown--;
+}
+
+cout &lt;&lt; "Head uut aastat!\n";</code></pre>
+<p><strong>Mis siin toimub?</strong></p>
+<ol start="1">
+    <li>
+        <p>Loome muutuja <code>countdown</code>, mille algväärtus on 3.</p>
+    </li>
+    <li>
+        <p>Kontrollime, kas <code>countdown</code> on suurem kui 0.</p>
+    </li>
+    <li>
+        <p>Kui tingimus on tõene, väljastame muutuja väärtuse.</p>
+    </li>
+    <li>
+        <p>Vähendame muutuja väärtust ühe võrra.</p>
+    </li>
+    <li>
+        <p>Kordame tegevust, kuni muutuja väärtus jõuab nullini.</p>
+    </li>
+    <li>
+        <p>Kui tingimus ei ole enam tõene, väljastame teksti „Head uut aastat!“.</p>
+    </li>
+</ol>
+<p>Programmi väljund:</p>
+<pre><code>3
+2
+1
+Head uut aastat!</code></pre>
+<p><strong>NB!</strong> Selles näites kasutatakse C++ standardset väljundkäsku <code>cout</code>, mille jaoks tuleb lisada teek <code>&lt;iostream&gt;</code> ja kasutada <code>std::cout</code> või sobivat nimeruumi määrangut. ESP32 ja Arduino puhul kasutatakse teksti väljastamiseks sageli hoopis <code>Serial.println()</code> funktsiooni. <strong>TLDR:&nbsp;cout vajab&nbsp;&lt;iostream&gt;</strong></p>
+<h3>for-tsükkel</h3>
+<p>Kui teame ette, mitu korda soovime mingit tegevust korrata, on tavaliselt mugavam kasutada <code>for</code>-tsüklit.</p>
+<p><strong>Üldine kuju:</strong></p>
+<pre><code>for (algväärtus; tingimus; muutmine) {
+  // Käsud, mida korratakse
+}</code></pre>
+<p><code>for</code>-tsüklis on kolm osa:</p>
+<ul>
+    <li>
+        <p><strong>Algväärtus</strong> – määrame loenduri algväärtuse.</p>
+    </li>
+    <li>
+        <p><strong>Tingimus</strong> – määrame, millal tsüklit jätkatakse.</p>
+    </li>
+    <li>
+        <p><strong>Muutmine</strong> – määrame, kuidas loenduri väärtus pärast iga kordust muutub.</p>
+    </li>
+</ul>
+<p><strong>Näide:</strong></p>
+<p>Järgmine programm väljastab paarisarvud nullist kümneni.</p>
+<pre><code>for (int i = 0; i &lt;= 10; i = i + 2) {
+  cout &lt;&lt; i &lt;&lt; "\n";
+}</code></pre>
+<p>Programmi väljund:</p>
+<pre><code>0
+2
+4
+6
+8
+10</code></pre>
+<p><strong>Mis siin toimub?</strong></p>
+<ul>
+    <li>
+        <p><code>int i = 0</code> – loome muutuja <code>i&nbsp;</code>(i nagu index number), mille algväärtus on 0.</p>
+    </li>
+    <li>
+        <p><code>i &lt;= 10</code> – tsükkel jätkub seni, kuni <code>i</code> on väiksem või võrdne kümnega.</p>
+    </li>
+    <li>
+        <p><code>i = i + 2</code> – pärast iga kordust suurendame muutujat kahe võrra.</p>
+    </li>
+</ul>
+<p>Seega väljastatakse ainult paarisarvud.</p>
+<h3>for-tsükkel meie mootorite <u>näidis</u> programmis</h3>
+<pre><code>for (int i = 0; i &lt; 50; i++) {
+  paremKiirus++;
+  analogWrite(PAREM_PWM, paremKiirus);
+}</code></pre>
+<p>Selles näites korratakse looksulgude vahel olevaid käske 50 korda.</p>
+<p>Iga kordusega suurendatakse muutuja <code>paremKiirus</code> väärtust ühe võrra ning saadetakse uus PWM-väärtus parema mootori juhtpin'ile.</p>
+<p>Kui <code>paremKiirus</code> algväärtus on 100, siis pärast tsükli lõppu on selle väärtus 150.</p>
+<p>Pane tähele, et selles näites kasutatakse <code>PAREM_PWM</code> pin'i, sest soovime juhtida paremat mootorit.</p>
+<p></p>

@@ -1,0 +1,28 @@
+<p dir="ltr" style="text-align: left;"></p>
+<p>Lisamaterjal: <a href="https://www.w3schools.com/c/c_macros.php">W3Schools – C Macros</a></p>
+<h3>#include – teekide ja päisefailide lisamine</h3>
+<p>Käsku <code>#include</code> kasutatakse selleks, et lisada programmi teeke <strong>(ingliskeeles <em>library</em>)</strong> või enda loodud päisefaile.</p>
+<p>Teegid sisaldavad valmis kirjutatud koodi, mida saame oma programmis kasutada. Nii ei pea me kõiki funktsioone ise nullist kirjutama.</p>
+<p><strong>Näide:</strong></p>
+<pre><code>#include &lt;Wire.h&gt;
+#include "VL53L1X.h"</code></pre>
+<p>Esimene rida lisab standardse I2C rääkimiskanali&nbsp;ja teine rida lisab&nbsp;<span>VL53L1X kaugusanduri teegi (koodi). Nende dokumentasioon on leitav:</span></p>
+<p>Wire.h -&nbsp;<a href="https://docs.arduino.cc/language-reference/en/functions/communication/wire/">https://docs.arduino.cc/language-reference/en/functions/communication/wire/</a></p>
+<p><span>VL53L1.h -&nbsp;<a href="https://docs.arduino.cc/libraries/vl53l1x/">https://docs.arduino.cc/libraries/vl53l1x/</a></span></p>
+<h3>#define – makro defineerimine</h3>
+<p>Makro on nimi, mis tähistab mingit väärtust või koodiosa. Makro loomiseks kasutatakse käsku <code>#define</code>.</p>
+<p>Näiteks:</p>
+<pre><code>#define VASAK_MOOTOR 23</code></pre>
+<p>See tähendab, et iga kord, kui programmis esineb <code>VASAK_MOOTOR</code>, asendatakse see enne programmi kompileerimist arvuga <code>23</code>.</p>
+<p><strong>Näide:</strong></p>
+<pre><code>#define VASAK_MOOTOR 23
+
+void setup() {
+  pinMode(<strong>VASAK_MOOTOR</strong>, OUTPUT); 
+}</code></pre>
+<p><span>Ehk siis pinMode(23, OUTPUT);</span></p>
+<p>Antud näites kasutame numbri <code>23</code> asemel nime <code>VASAK_MOOTOR</code>.</p>
+<p>Selline lähenemine teeb programmi paremini loetavaks. Kui hiljem otsustame mootori teise pin'i külge ühendada, piisab ainult <code>#define</code> real oleva numbri muutmisest. (PCB peal enam juhet ümber tõsta ei saa, aga hea teada tulevikuks)</p>
+<p><strong>NB!</strong> Erinevalt tavalistest C++ käskudest ei kirjutata <code>#define</code> rea lõppu semikoolonit (<code>;</code>).</p>
+<p><br></p><br><br>
+<p></p>

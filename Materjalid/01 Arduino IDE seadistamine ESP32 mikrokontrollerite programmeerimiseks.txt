@@ -1,0 +1,11 @@
+<p dir="ltr" style="text-align: left;"></p>
+<p dir="ltr"><span>1. Installi Arduino IDE:&nbsp;<a href="https://www.arduino.cc/en/software/" target="_blank" title="www.arduino.cc/en/software/">www.arduino.cc/en/software/</a></span></p>
+<p dir="ltr"><span>2. Installi ESP32 draiver mikrokontrolleriga suhtlemiseks:&nbsp;<a href="https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads">www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads</a></span></p>
+<p dir="ltr"><span style="font-size: 0.9375rem;">3.&nbsp;</span><span style="font-size: 0.9375rem;">Tuleb lisada ESP32 plaadid Arduino IDEsse</span></p>
+<p dir="ltr"><span>File -&gt; Preferences -&gt; Lisa&nbsp;“Additional Board Manager URLs” kasti</span></p>
+<p dir="ltr"><strong>https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json </strong><span>ja vajuta OK</span></p>
+<pre><img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2022/04/ESP32-URL-Arduino-IDE.png?w=828&amp;quality=100&amp;strip=all&amp;ssl=1" alt="Installing ESP32 Add-on in Arduino IDE Windows, Mac OS X, Linux enter URLs" width="800" height="478"><br></pre>
+<pre>4. Ava küljeribalt "Boards Manager", installi ESP32 plaadid (ESPRESSIF)</pre>
+<pre><img src="https://moodle.taltech.ee/draftfile.php/685804/user/draft/228243530/Screenshot%202025-10-13%20at%2018.52.52%20%281%29.png" alt="" width="800" height="533"><br></pre>
+<pre><img src="https://moodle.taltech.ee/draftfile.php/685804/user/draft/228243530/Screenshot%202025-10-13%20at%2018.54.22.png" alt="" width="800" height="817"></pre><br>
+<p></p>

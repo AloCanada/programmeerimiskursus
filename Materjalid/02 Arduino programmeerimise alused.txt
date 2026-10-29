@@ -1,0 +1,10 @@
+<p dir="ltr" style="text-align: left;"></p>
+<p><strong style="font-size: 0.9375rem;">Selle õpetuse lõpuks oskad:</strong></p>
+<ul>
+    <li><span>Aru saada, mida Arduino programm teeb.</span></li>
+    <li><span>Mõista, milleks kasutatakse käske </span><code>int</code><span>, </span><code>void</code><span>, </span><code>for</code><span>, </span><code>pinMode()</code><span> ja teisi.</span></li>
+    <li><span>Eristada Arduino programmi kahte põhiosa: </span><code>setup()</code><span> ja </span><code>loop()</code><span>.</span></li>
+    <li><span>Muuta mootorite kiirust ja pöörlemissuunda.</span></li>
+    <li><span>Leida koodist lihtsamaid vigu.</span></li>
+</ul><br><br>
+<p></p>

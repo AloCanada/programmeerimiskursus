@@ -1,0 +1,39 @@
+<p dir="ltr" style="text-align: left;"></p>
+<p>Lisamaterjal: <a href="https://www.w3schools.com/cpp/cpp_data_types.asp">W3Schools – C++ Data Types</a></p>
+<p>Programmeerimisel on kasulik kasutada muutujaid ja anda neile arusaadavad nimed.</p>
+<p>Matemaatikatunnis oleme harjunud kasutama muutujatena ladina tähestiku tähti (nt X, Y, Z) ja kreeka tähti (nt α, β, Σ).</p>
+<p>Programmeerimisel võib aga ainult üksikute tähtede kasutamine muuta koodi raskesti mõistetavaks. Seetõttu on mõistlik anda muutujatele nimed, mis kirjeldavad nende otstarvet.</p>
+<p>Näiteks <code>vasakKiirus</code> on palju arusaadavam kui lihtsalt <code>x</code>.</p>
+<h3>Muutuja loomine</h3>
+<p>Muutuja defineeritakse järgmiselt:</p>
+<pre><code>tüüp muutujaNimi = väärtus;</code></pre>
+<p>Siin tähistab:</p>
+<ul>
+    <li>
+        <p><code>tüüp</code> – millist tüüpi andmeid muutujas hoitakse.</p>
+    </li>
+    <li>
+        <p><code>muutujaNimi</code> – muutuja nimi, mille kaudu saame seda hiljem kasutada.</p>
+    </li>
+    <li>
+        <p><code>väärtus</code><span> – andmed, mille salvestame muutujasse.</span></p>
+    </li>
+</ul>
+<p><strong>Näited erinevatest andmetüüpidest:</strong></p>
+<pre><code>int myNum = 5;             // Täisarv
+uint8_t                    // Täisarv vahemikus 0-8^2 ehk 0-255<br>const                      // Väätus, mida ei lubata hiljem üle kirjutada, n-ö kivisse raiutud<br>float myFloatNum = 5.99;   // Komakohaga arv
+double myDoubleNum = 9.98; // Suurema täpsusega komakohaga arv
+char myLetter = 'D';       // Üks tähemärk
+bool myBoolean = true;     // Tõeväärtus (tõene või väär)
+String myText = "Tere";    // Tekst (Arduino String)<br></code></pre>
+<p>Meie mootorite juhtimise programmis kasutame peamiselt andmetüüpi <code>int</code>, sest mootori kiiruse juhtimiseks kasutame täisarve.</p>
+<p>Näiteks:</p>
+<pre><code>int vasakKiirus = 100;
+int paremKiirus = 100;</code></pre>
+<p>Sellega loome kaks muutujat, mille algväärtused on 100.</p>
+<p>Muutujate väärtusi saame programmi töötamise ajal muuta.</p>
+<p>Näiteks:</p>
+<pre><code>vasakKiirus = 150;</code></pre>
+<p>Nüüd on <code>vasakKiirus</code> väärtus 150.</p>
+<p><strong>NB!</strong> Kui muutuja on juba loodud, ei pea me selle väärtuse muutmisel enam andmetüüpi <code>int</code> kirjutama.</p><br>
+<p></p>

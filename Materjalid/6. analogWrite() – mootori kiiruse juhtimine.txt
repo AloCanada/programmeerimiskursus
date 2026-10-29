@@ -1,0 +1,32 @@
+<p dir="ltr" style="text-align: left;"></p>
+<p>Meie programmis kasutame funktsiooni <code>analogWrite()</code> mootori kiiruse juhtimiseks.</p>
+<p><strong>Näide:</strong></p>
+<pre><code>analogWrite(VASAK_PWM, vasakKiirus);</code></pre>
+<p>Selle käsuga saadetakse vasaku mootori PWM-juhtpin'ile väärtus, mille abil saab mõjutada mootori kiirust.</p>
+<h3>Mis on PWM?</h3>
+<p>PWM tähendab <em>Pulse Width Modulation</em> ehk impulsi laiuse modulatsiooni.</p>
+<p>See võib esialgu keeruliselt kõlada, aga põhimõte on lihtne.</p>
+<p>Mikrokontroller lülitab väljundsignaali väga kiiresti sisse ja välja. Muutes seda, kui suure osa ajast signaal sisse lülitatud on, saame muuta mootorile antavat keskmist võimsust.</p>
+<p>Meie näites kasutame 8-bitist PWM-väärtuste vahemikku <strong>0–255</strong>.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/0/02/PWM_duty_cycle_with_label.gif?utm_source=et.wikipedia.org&amp;utm_campaign=index&amp;utm_content=original" alt="Fail:PWM duty cycle with label.gif – Vikipeedia"><br></p>
+<p>Näiteks:</p>
+<ul>
+    <li>
+        <p><code>0</code> – signaal on pidevalt välja lülitatud.</p>
+    </li>
+    <li>
+        <p><code>128</code> – signaal on umbes poole ajast sisse lülitatud.</p>
+    </li>
+    <li>
+        <p><code>255</code> – signaal on pidevalt sisse lülitatud.</p>
+    </li>
+</ul>
+<p>Mida suurem on PWM-väärtus, seda suurem on üldjuhul mootori kiirus.</p>
+<p><strong>Näide:</strong></p>
+<pre><code>analogWrite(VASAK_PWM, 100);</code></pre>
+<p>See määrab vasaku mootori PWM-väärtuseks 100.</p>
+<p>Kui tahame väärtust suurendada:</p>
+<pre><code>analogWrite(VASAK_PWM, 200);</code></pre>
+<p>Siis antakse mootorile suurema töötsükliga PWM-signaal ning mootor pöörleb tavaliselt kiiremini.</p>
+<p><strong>NB!</strong> PWM-väärtus ei näita otseselt mootori tegelikku pöörlemiskiirust. Samuti peab kasutatav mikrokontrolleri pin toetama PWM-i.</p>
+<p></p>
