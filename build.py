@@ -203,7 +203,7 @@ def build() -> int:
     (OUTPUT_DIR / "assets" / "app.js").write_text((ROOT / "assets" / "app.js").read_text(encoding="utf-8"), encoding="utf-8")
     warnings: list[str] = []
     cards = "\n".join(f'<a class="lesson-row" href="{item.slug}.html"><span>{index:02d}</span><h2>{html.escape(item.title)}</h2><span class="lesson-arrow" aria-hidden="true">→</span></a>' for index, item in enumerate(items, 1))
-    intro = '<section class="hero"><p class="eyebrow">TalTechi fondi vaimus · Robotiklubi</p><h1>Programmeerimine, mis liigub päriselus.</h1><p>Praktiline sissejuhatus Arduino ja ESP32 programmeerimisse. Alusta algusest või vali endale sobiv teema.</p></section><section class="lesson-list" aria-label="Kursuse materjalid">' + cards + "</section>"
+    intro = '<section class="hero"><p class="eyebrow">MTÜ Robotiklubi · Teaduskool</p><h1>Programmeerimiskursus</h1><p>Praktiline sissejuhatus Arduino ja ESP32 programmeerimisse. <br>Autor: Alo Lõhmus.</p></section><section class="lesson-list" aria-label="Kursuse materjalid">' + cards + "</section>"
     (OUTPUT_DIR / "index.html").write_text(document("Ülevaade", intro, navigation(items), show_nav=False), encoding="utf-8")
     for item in items:
         fragment = item.source.read_text(encoding="utf-8")
