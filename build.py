@@ -74,6 +74,7 @@ def document(title: str, body: str, nav: str, show_nav: bool = True) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{html.escape(title)} | Robotiklubi programmeerimiskursus</title>
   <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/styles/github.min.css">
 </head>
 <body>
   <header class="site-header">
@@ -84,6 +85,7 @@ def document(title: str, body: str, nav: str, show_nav: bool = True) -> str:
     {sidebar}
     <main class="content">{body}</main>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/lib/common.min.js"></script>
   <script src="assets/app.js" defer></script>
 </body>
 </html>
@@ -111,6 +113,7 @@ def build() -> int:
         if not args.no_download:
             fragment = localize_images(fragment, item, warnings)
         fragment = re.sub(r"<pre>\s*(<img\b[\s\S]*?)</pre>", r'<div class="image-frame">\1</div>', fragment, flags=re.I)
+        fragment = re.sub(r"<pre>\s*<code(?:\s+class=\"([^\"]*)\")?>", r'<pre><code class="language-cpp \1">', fragment, flags=re.I)
         body = f'<p class="eyebrow">Õppematerjal {items.index(item) + 1:02d}</p><h1>{html.escape(item.title)}</h1><article class="lesson-content">{fragment}</article>'
         position = items.index(item)
         previous = f'<a href="{items[position - 1].slug}.html">← Eelmine</a>' if position else "<span></span>"

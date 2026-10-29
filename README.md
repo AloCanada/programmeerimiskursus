@@ -8,6 +8,8 @@ python build.py
 
 Tulemus on kaustas `site/`. Ava kohapeal `site/index.html` või käivita staatiline failiserver. Build proovib materjalides olevad välised pildid lokaalselt kausta `site/assets/images/` laadida. Moodle'i `draftfile.php` lingid vajavad Moodle'ist käsitsi alla laaditud faile, sest need ei ole avalikud.
 
+Koodinäited märgistatakse C/C++-na ja värvitakse lehel Highlight.js abil. See laaditakse CDN-ist, seega vajab süntaksivärvimine avalikus lehes internetiühendust.
+
 ## GitHub Pages
 
 Workflow `.github/workflows/pages.yml` ehitab saidi `main` harusse tehtud muudatuse järel. GitHubi repositooriumi seadetes tuleb Pagesi all valida **GitHub Actions**. Sait ei vaja backendi ega andmebaasi.

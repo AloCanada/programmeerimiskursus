@@ -34,9 +34,10 @@ a { color: var(--blue); }
 .lesson-content { padding: 26px 0; border-top: 1px solid var(--line); }
 .lesson-content img { display: block; max-width: 100%; height: auto; margin: 24px auto; }
 .lesson-content pre { overflow-x: auto; padding: 18px; background: var(--light-blue); color: var(--ink); border-left: 4px solid var(--blue); }
+.lesson-content pre code.hljs { padding: 0; background: transparent; }
+.lesson-content pre code { font-family: Consolas, "Courier New", monospace; }
 .lesson-content .image-frame { margin: 24px 0; }
 .lesson-content .image-frame img { margin: 0 auto; }
-.lesson-content code { font-family: Consolas, monospace; }
 .pager { display: flex; justify-content: space-between; gap: 20px; padding-top: 24px; border-top: 1px solid var(--line); }
 .menu-toggle { display: none; padding: 8px 12px; color: var(--ink); background: white; border: 1px solid var(--line); }
 @media (max-width: 800px) {

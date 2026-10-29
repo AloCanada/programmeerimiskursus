@@ -8,3 +8,7 @@ if (menuButton && sidebar) {
     sidebar.classList.toggle("is-open", !expanded);
   });
 }
+
+if (window.hljs) {
+  window.hljs.highlightAll();
+}
