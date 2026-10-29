@@ -1,7 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import base64
+import hashlib
 import html
+import json
+import os
 import re
 import shutil
 import urllib.request
@@ -13,6 +17,7 @@ ROOT = Path(__file__).parent
 SOURCE_DIR = ROOT / "Materjalid"
 OUTPUT_DIR = ROOT / "site"
 IMAGE_DIR = OUTPUT_DIR / "assets" / "images"
+SOURCE_IMAGE_DIR = ROOT / "assets" / "images"
 BRANDING_DIR = ROOT / "assets" / "branding"
 IMAGE_PATTERN = re.compile(r'(?P<prefix>\bsrc\s*=\s*["\'])(?P<url>https?://[^"\']+)(?P<suffix>["\'])', re.I)
 LOCAL_IMAGES = {
@@ -22,7 +27,9 @@ LOCAL_IMAGES = {
     "https://moodle.taltech.ee/draftfile.php/685804/user/draft/928663207/blokkdiagramm%201.2.drawio.png": "n-idiskood-blokkdiagramm.png",
     "https://upload.wikimedia.org/wikipedia/commons/0/02/PWM_duty_cycle_with_label.gif?utm_source=et.wikipedia.org&utm_campaign=index&utm_content=original": "pwm-duty-cycle.gif",
 }
+FALLBACK_IMAGE = "image-unavailable.svg"
 CODE_PATTERN = re.compile(r"(?P<comment>//[^\n]*|/\*[\s\S]*?\*/)|(?P<string>\"(?:\\.|[^\"\\])*\"|'(?:\\.|[^'\\])*')|(?P<preprocessor>^[ \t]*#[^\n]*)|(?P<number>\b\d+(?:\.\d+)?\b)|(?P<keyword>\b(?:auto|bool|break|case|const|continue|default|do|else|for|if|int|long|return|short|static|struct|switch|unsigned|void|while)\b)|(?P<type>\b(?:HIGH|LOW|INPUT|OUTPUT|INPUT_PULLUP|String|uint8_t|true|false)\b)|(?P<function>\b[a-zA-Z_]\w*(?=\s*\())", re.M)
+PROTECTED_LESSON = "9. Näidiskood.txt"
 
 
 @dataclass(frozen=True)
@@ -46,13 +53,16 @@ def lessons() -> list[Lesson]:
     return [Lesson(path, slug_from_title(title_from_filename(path)), title_from_filename(path)) for path in files]
 
 
-def localize_images(fragment: str, lesson: Lesson, warnings: list[str]) -> str:
+def localize_images(fragment: str, lesson: Lesson, warnings: list[str], download: bool) -> str:
     def replace(match: re.Match[str]) -> str:
         url = html.unescape(match.group("url"))
         local_name = LOCAL_IMAGES.get(url)
-        if local_name and (ROOT / "assets" / "images" / local_name).exists():
-            shutil.copyfile(ROOT / "assets" / "images" / local_name, IMAGE_DIR / local_name)
+        if local_name and (SOURCE_IMAGE_DIR / local_name).exists():
+            shutil.copyfile(SOURCE_IMAGE_DIR / local_name, IMAGE_DIR / local_name)
             return f'{match.group("prefix")}assets/images/{local_name}{match.group("suffix")}'
+        if not download:
+            warnings.append(f"{lesson.source.name}: pildi ei leitud lokaalselt ({url})")
+            return f'{match.group("prefix")}assets/images/{FALLBACK_IMAGE}{match.group("suffix")}'
         suffix = Path(url.split("?", 1)[0]).suffix.lower() or ".img"
         image_name = f"{lesson.slug}-{len(list(IMAGE_DIR.glob(f'{lesson.slug}-*'))) + 1}{suffix}"
         destination = IMAGE_DIR / image_name
@@ -62,7 +72,7 @@ def localize_images(fragment: str, lesson: Lesson, warnings: list[str]) -> str:
                 destination.write_bytes(response.read())
         except Exception as error:
             warnings.append(f"{lesson.source.name}: pilti ei saanud alla laadida ({url}): {error}")
-            return match.group(0)
+            return f'{match.group("prefix")}assets/images/{FALLBACK_IMAGE}{match.group("suffix")}'
         return f'{match.group("prefix")}assets/images/{image_name}{match.group("suffix")}'
 
     return IMAGE_PATTERN.sub(replace, fragment)
@@ -83,6 +93,49 @@ def highlight_code(match: re.Match[str]) -> str:
 
 def highlight_code_blocks(fragment: str) -> str:
     return re.sub(r"<pre>\s*<code(?:\s+class=\"[^\"]*\")?>([\s\S]*?)</code>\s*</pre>", highlight_code, fragment, flags=re.I)
+
+
+def crypt_stream(key: bytes, nonce: bytes, data: bytes) -> bytes:
+    output = bytearray()
+    counter = 0
+    while len(output) < len(data):
+        block = hashlib.sha256(key + nonce + counter.to_bytes(4, "big")).digest()
+        output.extend(block)
+        counter += 1
+    return bytes(value ^ stream for value, stream in zip(data, output))
+
+
+def protected_code_block(fragment: str, pin: str) -> str:
+    pattern = re.compile(
+        r"(?P<heading><h4>(?:(?!</h4>)[\s\S])*?Koodi näide(?:(?!</h4>)[\s\S])*?</h4>)\s*"
+        r"<pre><code(?P<attributes>[^>]*)>(?P<code>[\s\S]*?)</code></pre>",
+        re.I,
+    )
+    match = pattern.search(fragment)
+    if not match:
+        raise ValueError(f"{PROTECTED_LESSON}: suurt koodiplokki ei leitud.")
+    salt = os.urandom(16)
+    nonce = os.urandom(16)
+    key = hashlib.pbkdf2_hmac("sha256", pin.encode("utf-8"), salt, 200_000, 32)
+    plaintext = match.group("code").encode("utf-8")
+    ciphertext = crypt_stream(key, nonce, plaintext)
+    payload = base64.urlsafe_b64encode(
+        json.dumps(
+            {
+                "salt": base64.urlsafe_b64encode(salt).decode("ascii"),
+                "nonce": base64.urlsafe_b64encode(nonce).decode("ascii"),
+                "iterations": 200_000,
+                "checksum": base64.urlsafe_b64encode(hashlib.sha256(plaintext).digest()).decode("ascii"),
+                "ciphertext": base64.urlsafe_b64encode(ciphertext).decode("ascii"),
+            },
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).decode("ascii")
+    replacement = (
+        '<div class="protected-code" hidden data-code-payload="'
+        f'{html.escape(payload, quote=True)}">{match.group("heading")}</div>'
+    )
+    return fragment[: match.start()] + replacement + fragment[match.end() :]
 
 
 def navigation(items: list[Lesson], current: Lesson | None = None) -> str:
@@ -136,12 +189,16 @@ def build() -> int:
     parser = argparse.ArgumentParser(description="Genereeri programmeerimiskursuse staatiline veeb.")
     parser.add_argument("--no-download", action="store_true", help="Ära laadi väliseid pilte alla.")
     args = parser.parse_args()
+    code_pin = os.environ.get("COURSE_CODE_PIN")
+    if not code_pin:
+        raise SystemExit("COURSE_CODE_PIN keskkonnamuutuja on kohustuslik.")
     items = lessons()
     if not items:
         raise SystemExit("Materjalid-kaustas ei ole .txt materjale.")
     if OUTPUT_DIR.exists():
         shutil.rmtree(OUTPUT_DIR)
     IMAGE_DIR.mkdir(parents=True)
+    shutil.copyfile(ROOT / "assets" / "images" / FALLBACK_IMAGE, IMAGE_DIR / FALLBACK_IMAGE)
     (OUTPUT_DIR / "assets" / "styles.css").write_text((ROOT / "assets" / "styles.css").read_text(encoding="utf-8"), encoding="utf-8")
     (OUTPUT_DIR / "assets" / "app.js").write_text((ROOT / "assets" / "app.js").read_text(encoding="utf-8"), encoding="utf-8")
     warnings: list[str] = []
@@ -150,10 +207,11 @@ def build() -> int:
     (OUTPUT_DIR / "index.html").write_text(document("Ülevaade", intro, navigation(items), show_nav=False), encoding="utf-8")
     for item in items:
         fragment = item.source.read_text(encoding="utf-8")
-        if not args.no_download:
-            fragment = localize_images(fragment, item, warnings)
+        fragment = localize_images(fragment, item, warnings, download=not args.no_download)
         fragment = re.sub(r"<pre>\s*(<img\b[\s\S]*?)</pre>", r'<div class="image-frame">\1</div>', fragment, flags=re.I)
         fragment = highlight_code_blocks(fragment)
+        if item.source.name == PROTECTED_LESSON:
+            fragment = protected_code_block(fragment, code_pin)
         body = f'<p class="eyebrow">Õppematerjal {items.index(item) + 1:02d}</p><h1>{html.escape(item.title)}</h1><article class="lesson-content">{fragment}</article>'
         position = items.index(item)
         previous = f'<a href="{items[position - 1].slug}.html">← Eelmine</a>' if position else "<span></span>"

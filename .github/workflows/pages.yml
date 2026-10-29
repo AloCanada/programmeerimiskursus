@@ -20,6 +20,8 @@ jobs:
         with:
           python-version: "3.x"
       - run: python build.py
+        env:
+          COURSE_CODE_PIN: ${{ secrets.COURSE_CODE_PIN }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

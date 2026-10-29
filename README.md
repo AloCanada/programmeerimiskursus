@@ -8,6 +8,15 @@ python build.py
 
 Tulemus on kaustas `site/`. Ava kohapeal `site/index.html` või käivita staatiline failiserver. Build proovib materjalides olevad välised pildid lokaalselt kausta `site/assets/images/` laadida. Moodle'i `draftfile.php` lingid vajavad Moodle'ist käsitsi alla laaditud faile, sest need ei ole avalikud.
 
+Build vajab keskkonnamuutujat `COURSE_CODE_PIN`, mida kasutatakse näidiskoodi ligipääsuvärava jaoks. PowerShellis:
+
+```powershell
+$env:COURSE_CODE_PIN = "vali-salajane-pin"
+python build.py
+```
+
+`Näidiskood`-lehe suur koodiplokk ei ole genereeritud HTML-is loetava tekstina. See avatakse brauseris Tab-klahvi järel PIN-i sisestamisel. Tegemist on staatilise saidi praktilise takistusega, mitte serveripoolse ligipääsukontrolliga.
+
 Koodinäited märgistatakse C/C++-na ja värvitakse build'i ajal otse HTML-i sisse, seega töötab süntaksivärvimine ka lokaalselt ja ilma välise teenuseta.
 
 ## Logo lisamine

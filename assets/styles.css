@@ -36,6 +36,9 @@ a { color: var(--blue); }
 .lesson-content img { display: block; max-width: 100%; height: auto; margin: 24px auto; }
 .lesson-content pre { overflow-x: auto; padding: 18px; background: var(--light-blue); color: var(--ink); border-left: 4px solid var(--blue); }
 .lesson-content pre code { font-family: Consolas, "Courier New", monospace; }
+.protected-code { display: contents; }
+.protected-code[hidden] { display: none; }
+.protected-code pre { margin: 0; }
 .lesson-content .code-comment { color: #708090; }
 .lesson-content .code-string { color: #a31515; }
 .lesson-content .code-preprocessor { color: #795e26; }
@@ -45,6 +48,30 @@ a { color: var(--blue); }
 .lesson-content .code-function { color: #795e26; }
 .lesson-content .image-frame { margin: 24px 0; }
 .lesson-content .image-frame img { margin: 0 auto; }
+.lesson-content .c4l-keyconcept,
+.lesson-content .c4l-attention {
+  min-width: 200px;
+  max-width: 75%;
+  margin: 48px auto;
+  padding: 24px 36px 30px;
+  border: 0;
+  border-left: 6px solid;
+  border-radius: 0;
+  position: relative;
+}
+.lesson-content .c4l-keyconcept {
+  background: #f1f5fe;
+  border-left-color: #387af1;
+}
+.lesson-content .c4l-attention {
+  padding-right: 48px;
+  background: #fef6ed;
+  border-left-color: #f88923;
+}
+.lesson-content .c4l-keyconcept a,
+.lesson-content .c4l-attention a {
+  overflow-wrap: anywhere;
+}
 .pager { display: flex; justify-content: space-between; gap: 20px; padding-top: 24px; border-top: 1px solid var(--line); }
 .menu-toggle { display: none; padding: 8px 12px; color: var(--ink); background: white; border: 1px solid var(--line); }
 @media (max-width: 800px) {
@@ -53,4 +80,6 @@ a { color: var(--blue); }
   .sidebar.is-open { display: block; }
   .menu-toggle { display: block; }
   .hero { padding-top: 20px; }
+  .lesson-content .c4l-keyconcept,
+  .lesson-content .c4l-attention { max-width: 100%; }
 }
